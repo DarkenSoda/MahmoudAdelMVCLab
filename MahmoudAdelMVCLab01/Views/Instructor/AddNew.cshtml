@@ -1,0 +1,36 @@
+﻿@{
+	ViewData["Title"] = "Details";
+	SelectList deptList = new SelectList(ViewBag.Departments, "Id", "Name");
+	SelectList crsList = new SelectList(ViewBag.Courses, "Id", "Name");
+}
+
+@model Instructor
+
+<form method="post" asp-action="SaveChanges">
+	<input type="checkbox" hidden name="isNew" checked value="true" />
+	<div class="form-group">
+		<label asp-for="Name"></label>
+		<input class="form-control" asp-for="Name" placeholder="Enter Name" required>
+	</div>
+	<div class="form-group">
+		<label asp-for="Salary"></label>
+		<input asp-for="Salary" class="form-control" placeholder="Enter Salary" required>
+	</div>
+	<div class="form-group">
+		<label asp-for="Address"></label>
+		<input asp-for="Address" class="form-control" placeholder="Enter Address">
+	</div>
+	<div class="form-group">
+		<label asp-for="DeptID">Department ID</label>
+		<select asp-for="DeptID" class="form-control" asp-items="deptList">
+			<option disabled selected>Select Department</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label asp-for="CourseID">Course ID</label>
+		<select asp-for="CourseID" class="form-control" asp-items="crsList">
+			<option disabled selected>Select Course</option>
+		</select>
+	</div>
+	<button type="submit" class="btn btn-outline-primary">Save</button>
+</form>

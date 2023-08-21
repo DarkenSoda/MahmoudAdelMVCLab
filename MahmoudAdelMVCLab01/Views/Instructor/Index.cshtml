@@ -1,0 +1,35 @@
+﻿@{
+	ViewData["Title"] = "Instructors";
+}
+
+@model List<Instructor>
+
+<div class="container text-center">
+	<div class="row">
+		<div class="col-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Instructor</th>
+						<th scope="col">Salary</th>
+						<th scope="col">Address</th>
+						<th scope="col">Details</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var instructor in Model) {
+						<tr>
+							<th scope="row">@instructor.Name</th>
+							<td>@instructor.Salary</td>
+							<td>@(instructor.Address ?? "---")</td>
+							<td>
+								<a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@instructor.Id" asp-controller="Instructor">Edit</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<a class="btn btn-outline-primary" asp-action="AddNew" asp-controller="Instructor">Add New Instructor</a>
+		</div>
+	</div>
+</div>

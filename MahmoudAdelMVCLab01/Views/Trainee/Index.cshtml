@@ -1,0 +1,49 @@
+﻿@{
+	ViewData["Title"] = "Trainees";
+}
+
+@model List<GroupEachTraineeWithCourses>
+
+<div class="container text-center">
+	<div class="row">
+		<div class="col-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Trainee ID</th>
+						<th scope="col">Trainee Name</th>
+						<th scope="col">Address</th>
+						<th scope="col">Department ID</th>
+						<th scope="col">Courses</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var trainee in Model) {
+						<tr>
+							<th scope="row">@trainee.TraineeID</th>
+							<td>@trainee.TraineeName</td>
+							<td>@(trainee.TraineeAddress ?? "---")</td>
+							<td>@trainee.DeptID</td>
+
+							<td>
+								<form asp-action="ShowResult" asp-controller="Trainee" method="get">
+									<input type="hidden" name="id" value="@trainee.TraineeID" />
+									<div style="display:flex;">
+										<select class="form-select" aria-label="Default select example" name="crs">
+											@foreach (var course in trainee.CourseNames) {
+												<option class="dropdown-item" value="@course">
+													@course
+												</option>
+											}
+										</select>
+										<button type="submit" class="btn btn-outline-primary">Details</button>
+									</div>
+								</form>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

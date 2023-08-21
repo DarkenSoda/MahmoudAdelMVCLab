@@ -1,0 +1,21 @@
+﻿@{
+	ViewData["Title"] = "Products";
+}
+@model Product
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card text-center" style="width: 20rem;">
+        <img src="~/Images/@Model.Image" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@(Model.Description ?? "---")</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: @Model.Id</li>
+            <li class="list-group-item">Price: @Model.Price</li>
+        </ul>
+        <div class="card-body">
+            <a class="btn btn-outline-primary" asp-action="Index" asp-controller="Product">Show All Products</a>
+        </div>
+    </div>
+</div>
