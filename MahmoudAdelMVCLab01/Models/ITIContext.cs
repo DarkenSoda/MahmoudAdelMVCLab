@@ -11,6 +11,6 @@ public class ITIContext : DbContext{
     public virtual DbSet<CourseResult> CourseResult { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        optionsBuilder.UseSqlServer("Server=DESKTOP-FUGQNF4;Database=ITITraining;Trusted_Connection=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=.;Database=ITITraining;Trusted_Connection=True;TrustServerCertificate=True;");
     }
 }
