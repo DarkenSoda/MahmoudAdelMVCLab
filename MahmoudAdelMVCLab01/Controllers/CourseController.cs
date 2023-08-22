@@ -48,13 +48,13 @@ public class CourseController : Controller {
 	}
 
 	[HttpPost]
-	public IActionResult SaveChanges(Course crs, bool isNew) {
+	public IActionResult SaveChanges(Course crs) {
 		if (!ModelState.IsValid) {
-            string viewName = isNew ? nameof(AddCourse) : nameof(EditCourse);
+            string viewName = crs.Id == 0 ? nameof(AddCourse) : nameof(EditCourse);
             return View(viewName);
         }
 
-		if (isNew) {
+		if (crs.Id == 0) {
 			context.Course.Add(crs);
 		} else {
 			var courseToEdit = context.Course.Find(crs.Id);
@@ -66,5 +66,14 @@ public class CourseController : Controller {
 
 		context.SaveChanges();
 		return RedirectToAction(nameof(Index));
+	}
+
+	public IActionResult Unique(string name, int Id) {
+		Course? foundCourse = context.Course.Where(crs => crs.Name == name).FirstOrDefault();
+
+		if (foundCourse == null || foundCourse.Id == Id) {
+			return Json(true);
+		}
+		return Json($"The course name '{name}' is already taken.");
 	}
 }
